@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slx.mapper.YearMapper">
+
+	<insert id="addYear">
+		INSERT yearCheck VALUES(#{y.id},#{y.guan},#{y.desc},#{y.name},#{y.goods},#{y.addr},#{y.res},#{y.ctime},#{y.ydate},#{y.tai},#{y.bei});
+	</insert>
+	
+	<select id="selectById" resultType="com.slx.bean.YearCheck">
+		SELECT * FROM yearCheck
+		<where>
+			<if test="guan!=null">
+				guan like "%${guan}%"
+			</if>
+			<if test="desc!=null">
+				and desc like "%${desc}%"
+			</if>
+			
+		</where>
+	</select>
+	<select id="queryById" resultType="com.slx.bean.YearCheck">
+		SELECT * FROM yearCheck 
+		<where>
+			<if test="id!=0">
+				id=#{id}
+			</if>
+		</where>
+	</select>
+	<update id="update">
+		UPDATE yearCheck SET guan=#{y.guan},DESC=#{y.DESC},NAME=#{y.NAME},goods=#{y.goods},addr=#{y.addr},res=#{y.res},ctime=#{y.ctime},ydate=#{y.ydate},tai=#{y.tai},bei=#{y.bei}   WHERE id=#{y.id}
+	</update>
+	
+</mapper>
